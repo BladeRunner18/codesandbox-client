@@ -4,25 +4,11 @@ const path = require('path');
 const rimrafSync = require('rimraf').sync;
 const { staticAssets } = require('../config/build');
 
-const { SANDBOX_ONLY } = process.env;
-
 const assets = [
   ...staticAssets,
   {
     from: 'packages/app/www',
     to: '',
-  },
-  !SANDBOX_ONLY && {
-    from: 'packages/homepage/public',
-    to: '',
-  },
-  !SANDBOX_ONLY && {
-    from: 'standalone-packages/monaco-editor/release/min/vs',
-    to: 'public/14/vs',
-  },
-  !SANDBOX_ONLY && {
-    from: 'standalone-packages/vscode-editor/release/min/vs',
-    to: 'public/vscode33/vs',
   },
   {
     from: 'packages/app/public',

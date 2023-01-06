@@ -29,7 +29,7 @@ g.jsdom = {
 };
 
 // IE11
-require('core-js/fn/array/find');
-require('core-js/fn/array/from');
-require('core-js/fn/object/assign');
-require('core-js/fn/symbol');
+// require('core-js/fn/array/find');
+// require('core-js/fn/array/from');
+// require('core-js/fn/object/assign');
+// require('core-js/fn/symbol');
