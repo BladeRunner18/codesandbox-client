@@ -42,6 +42,14 @@ const BASE_REACT_BABEL_PLUGINS = [
   '@babel/plugin-proposal-optional-chaining',
   '@babel/plugin-proposal-nullish-coalescing-operator',
   'syntax-dynamic-import',
+  // [
+  //   'babel-plugin-import',
+  //   {
+  //     libraryName: '@wemo-ui/klein',
+  //     libraryDirectory: 'lib',
+  //     style: true,
+  //   },
+  // ],
 ];
 
 const BASE_REACT_PRESETS_CONFIG = [
@@ -139,6 +147,14 @@ export async function reactPreset(pkg: PackageJSON) {
 
         if (!deps['@babel/runtime']) {
           deps['@babel/runtime'] = '^7.3.4';
+        }
+
+        // 处理缺失的依赖
+        // if(deps['@wemo-ui/klein']) {
+        //   deps['react-is'] = '18.2.0';
+        // }
+        if(deps.antd) {
+          deps.dayjs = '1.11.7';
         }
 
         // Don't delete babel-runtime, some dependencies rely on it...

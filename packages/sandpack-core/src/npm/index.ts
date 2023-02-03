@@ -22,6 +22,7 @@ export type NPMDependencies = {
 const PRELOADED_PROTOCOLS = [
   preloadedProtocols.jsdelivr,
   preloadedProtocols.unpkg,
+  preloadedProtocols.weimob
 ];
 
 /**

@@ -21,14 +21,18 @@ const DEV_URLS = {
 };
 // eslint-disable-next-line
 const PROD_URLS = {
-  packager:
-    'https://aiwi8rnkp5.execute-api.eu-west-1.amazonaws.com/prod/packages',
-  bucket: 'https://prod-packager-packages.codesandbox.io',
+  // packager:
+  //   'https://aiwi8rnkp5.execute-api.eu-west-1.amazonaws.com/prod/packages',
+  // bucket: 'https://prod-packager-packages.codesandbox.io',
+
+  bucket: 'http://172.19.17.92:7080/oort2',
+  packager: 'http://172.19.17.239:7080/oort2/dependencies/packager',
 };
 
 const URLS = PROD_URLS;
 const BUCKET_URL = URLS.bucket;
-const PACKAGER_URL = URLS.packager;
+const PACKAGER_URL= PROD_URLS.packager;
+// const PACKAGER_URL = 'http://localhost:4545/oort2/dependencies/packager';
 
 function callApi(url: string, method = 'GET') {
   return fetch(url, {
@@ -53,7 +57,16 @@ function callApi(url: string, method = 'GET') {
 
       return response;
     })
-    .then(response => response.json());
+    .then(response => response.json())
+    .then(res => {
+      if (res.errcode === 0) {
+        return res.data;
+      }
+      const error = new Error(res.errmsg);
+      // @ts-ignore
+      error.statusCode = res.errcode;
+      throw error;
+    });
 }
 
 /**
@@ -73,26 +86,29 @@ async function requestPackager(
   try {
     const manifest = await callApi(url, method);
     return manifest;
-  } catch (err) {
+  } catch (err:any) {
     console.error({ err });
 
-    // If it's a 403 or network error, we retry the fetch
-    if (err.response && err.statusCode !== 403) {
-      throw new Error(err.response.error);
-    }
+    throw new Error(err.response.error);
 
-    // 403 status code means the bundler is still bundling
-    if (retries < RETRY_COUNT) {
-      const msDelay = Math.min(
-        MAX_RETRY_DELAY,
-        1000 * retries + Math.round(Math.random() * 1000)
-      );
-      console.warn(`Retrying package fetch in ${msDelay}ms`);
-      await delay(msDelay);
-      return requestPackager(url, method, retries + 1);
-    }
 
-    throw err;
+    // // If it's a 403 or network error, we retry the fetch
+    // if (err.response && err.statusCode !== 403) {
+    //   throw new Error(err.response.error);
+    // }
+
+    // // 403 status code means the bundler is still bundling
+    // if (retries < RETRY_COUNT) {
+    //   const msDelay = Math.min(
+    //     MAX_RETRY_DELAY,
+    //     1000 * retries + Math.round(Math.random() * 1000)
+    //   );
+    //   console.warn(`Retrying package fetch in ${msDelay}ms`);
+    //   await delay(msDelay);
+    //   return requestPackager(url, method, retries + 1);
+    // }
+
+    // throw err;
   }
 }
 
@@ -115,14 +131,19 @@ export async function getDependency(
   const dependencyUrl = dependenciesToQuery({ [depName]: normalizedVersion });
   const fullUrl = `${BUCKET_URL}/v${VERSION}/packages/${depName}/${normalizedVersion}.json`;
 
+  // const packagerRequestUrl = `${PACKAGER_URL}/${dependencyUrl}`;
+  // const bucketManifest = await callApi(packagerRequestUrl, 'get');
+
+  // return bucketManifest;
+
   try {
-    const bucketManifest = await callApi(fullUrl);
-    return bucketManifest;
+    throw new Error('error')
+    // const bucketManifest = await callApi(fullUrl);
+    // return bucketManifest;
   } catch (e) {
     // The dep has not been generated yet...
     const packagerRequestUrl = `${PACKAGER_URL}/${dependencyUrl}`;
-    await requestPackager(packagerRequestUrl, 'POST');
 
-    return requestPackager(fullUrl);
+    return requestPackager(packagerRequestUrl,"GET");
   }
 }

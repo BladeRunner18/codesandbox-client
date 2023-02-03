@@ -7,12 +7,14 @@ import { isTarDependency, TarFetcher } from './tar';
 import { GistFetcher } from './gist';
 import { FetchProtocol } from '../fetch-npm-module';
 import { ProtocolTransformer } from './transformer';
+import { WeimobNPMFetcher } from './weimob';
 
 let contributedProtocols: ProtocolDefinition[] = [];
 
 export const preloadedProtocols = {
   jsdelivr: new JSDelivrNPMFetcher(),
   unpkg: new UnpkgFetcher(),
+  weimob:new WeimobNPMFetcher()
 };
 
 const protocols: ProtocolDefinition[] = [
@@ -42,6 +44,11 @@ const protocols: ProtocolDefinition[] = [
   {
     protocol: new TarFetcher(),
     condition: (name, version) => isTarDependency(version),
+  },
+
+  {
+    protocol: preloadedProtocols.weimob,
+    condition: (_name, _version, useFallback) => true,
   },
   {
     protocol: preloadedProtocols.unpkg,
