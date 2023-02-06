@@ -13,8 +13,7 @@ import { show404 } from 'sandbox-hooks/not-found-screen';
 
 import compile, { getCurrentManager } from './compile';
 
-import mockData from './mock'
-
+import mockData from './mock';
 
 const host = process.env.CODESANDBOX_HOST;
 const withServiceWorker = !process.env.SANDPACK;
@@ -81,8 +80,10 @@ requirePolyfills().then(() => {
     sendReady();
   }
 
-  compile(mockData)
-
+  // 本地调试
+  if (process.env.NODE_ENV === 'test' || isStandalone) {
+    compile(mockData as any);
+  }
 });
 
 /**

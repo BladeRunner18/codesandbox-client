@@ -26,7 +26,7 @@ const PROD_URLS = {
   // bucket: 'https://prod-packager-packages.codesandbox.io',
 
   bucket: 'http://172.19.17.92:7080/oort2',
-  packager: 'http://172.19.17.239:7080/oort2/dependencies/packager',
+  packager: 'http://10.252.29.143:7080/oort2/dependencies/packager',
 };
 
 const URLS = PROD_URLS;
