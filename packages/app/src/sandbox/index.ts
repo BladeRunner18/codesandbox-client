@@ -81,9 +81,9 @@ requirePolyfills().then(() => {
   }
 
   // 本地调试
-  if (process.env.NODE_ENV === 'test' || isStandalone) {
-    compile(mockData as any);
-  }
+  // if (process.env.NODE_ENV === 'test' || isStandalone) {
+  //   compile(mockData as any);
+  // }
 });
 
 /**

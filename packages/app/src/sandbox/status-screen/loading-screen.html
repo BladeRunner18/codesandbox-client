@@ -26,6 +26,7 @@
     width: 6rem;
     height: 6rem;
   }
+
   .cube .sides * {
     box-sizing: border-box;
     border: 0.12rem solid white;
@@ -37,9 +38,11 @@
     0% {
       transform: rotateX(-37.5deg) rotateY(45deg);
     }
+
     50% {
       transform: rotateX(-37.5deg) rotateY(405deg);
     }
+
     100% {
       transform: rotateX(-37.5deg) rotateY(405deg);
     }
@@ -65,23 +68,28 @@
       opacity: 1;
       transform: rotateX(90deg) translateZ(100px);
     }
+
     20% {
       opacity: 1;
       transform: rotateX(90deg) translateZ(48px);
     }
+
     70% {
       opacity: 1;
       transform: rotateX(90deg) translateZ(48px);
     }
+
     90% {
       opacity: 1;
       transform: rotateX(90deg) translateZ(100px);
     }
+
     100% {
       opacity: 1;
       transform: rotateX(90deg) translateZ(100px);
     }
   }
+
   .cube .sides .bottom {
     animation: bottom-animation 3s ease infinite;
     animation-delay: 0ms;
@@ -95,23 +103,28 @@
       opacity: 1;
       transform: rotateX(-90deg) translateZ(100px);
     }
+
     20% {
       opacity: 1;
       transform: rotateX(-90deg) translateZ(48px);
     }
+
     70% {
       opacity: 1;
       transform: rotateX(-90deg) translateZ(48px);
     }
+
     90% {
       opacity: 1;
       transform: rotateX(-90deg) translateZ(100px);
     }
+
     100% {
       opacity: 1;
       transform: rotateX(-90deg) translateZ(100px);
     }
   }
+
   .cube .sides .front {
     animation: front-animation 3s ease infinite;
     animation-delay: 100ms;
@@ -125,23 +138,28 @@
       opacity: 1;
       transform: rotateY(0deg) translateZ(96px);
     }
+
     20% {
       opacity: 1;
       transform: rotateY(0deg) translateZ(48px);
     }
+
     70% {
       opacity: 1;
       transform: rotateY(0deg) translateZ(48px);
     }
+
     90% {
       opacity: 1;
       transform: rotateY(0deg) translateZ(96px);
     }
+
     100% {
       opacity: 1;
       transform: rotateY(0deg) translateZ(96px);
     }
   }
+
   .cube .sides .back {
     animation: back-animation 3s ease infinite;
     animation-delay: 100ms;
@@ -155,23 +173,28 @@
       opacity: 1;
       transform: rotateY(-180deg) translateZ(96px);
     }
+
     20% {
       opacity: 1;
       transform: rotateY(-180deg) translateZ(48px);
     }
+
     70% {
       opacity: 1;
       transform: rotateY(-180deg) translateZ(48px);
     }
+
     90% {
       opacity: 1;
       transform: rotateY(-180deg) translateZ(96px);
     }
+
     100% {
       opacity: 1;
       transform: rotateY(-180deg) translateZ(96px);
     }
   }
+
   .cube .sides .left {
     animation: left-animation 3s ease infinite;
     animation-delay: 100ms;
@@ -185,23 +208,28 @@
       opacity: 1;
       transform: rotateY(-90deg) translateZ(96px);
     }
+
     20% {
       opacity: 1;
       transform: rotateY(-90deg) translateZ(48px);
     }
+
     70% {
       opacity: 1;
       transform: rotateY(-90deg) translateZ(48px);
     }
+
     90% {
       opacity: 1;
       transform: rotateY(-90deg) translateZ(96px);
     }
+
     100% {
       opacity: 1;
       transform: rotateY(-90deg) translateZ(96px);
     }
   }
+
   .cube .sides .right {
     animation: right-animation 3s ease infinite;
     animation-delay: 100ms;
@@ -215,26 +243,50 @@
       opacity: 1;
       transform: rotateY(90deg) translateZ(96px);
     }
+
     20% {
       opacity: 1;
       transform: rotateY(90deg) translateZ(48px);
     }
+
     70% {
       opacity: 1;
       transform: rotateY(90deg) translateZ(48px);
     }
+
     90% {
       opacity: 1;
       transform: rotateY(90deg) translateZ(96px);
     }
+
     100% {
       opacity: 1;
       transform: rotateY(90deg) translateZ(96px);
     }
   }
+
+  @keyframes spining {
+    0%{
+      transform: rotate(0deg);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+
+  .spin{
+    position: absolute;
+    animation: spining 1s linear infinite;
+  }
 </style>
 <div class="container">
-  <div class="cube">
+  <div class="spin">
+    <svg t="1676361345443" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      p-id="6503" width="80" height="80">
+      <path d="M512 0a512 512 0 0 1 512 512h-64a448 448 0 0 0-448-448V0z" fill="#2589ff" p-id="6504"></path>
+    </svg>
+  </div>
+  <!-- <div class="cube">
     <div class="sides">
       <div class="top"></div>
       <div class="right"></div>
@@ -243,7 +295,7 @@
       <div class="front"></div>
       <div class="back"></div>
     </div>
-  </div>
+  </div> -->
   <div class="text">Downloading dependencies</div>
 </div>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&display=swap" rel="stylesheet">

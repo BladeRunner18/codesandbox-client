@@ -101,9 +101,31 @@
     transform-origin: 50% 50%;
   }
 
+  
+  @keyframes spining {
+    0%{
+      transform: rotate(0deg);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+
+  .spin{
+    position: absolute;
+    animation: spining 1s linear infinite;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+  }
+
 </style>
 <div class="container">
-  <div class="cube">
+  <!-- <div class="cube">
     <div class="sides">
       <div class="top"></div>
       <div class="right"></div>
@@ -112,6 +134,12 @@
       <div class="front"></div>
       <div class="back"></div>
     </div>
+  </div> -->
+  <div class="spin">
+    <svg t="1676361345443" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      p-id="6503" width="30" height="30">
+      <path d="M512 0a512 512 0 0 1 512 512h-64a448 448 0 0 0-448-448V0z" fill="#2589ff" p-id="6504"></path>
+    </svg>
   </div>
 </div>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&display=swap" rel="stylesheet">

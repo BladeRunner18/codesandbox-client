@@ -26,12 +26,13 @@ const PROD_URLS = {
   // bucket: 'https://prod-packager-packages.codesandbox.io',
 
   bucket: 'http://172.19.17.92:7080/oort2',
-  packager: 'http://10.252.29.143:7080/oort2/dependencies/packager',
+  packager:
+    'http://bos-fe-oort2-node-kn.app.internal.weimobqa.com/oort2/dependencies/packager',
 };
 
 const URLS = PROD_URLS;
 const BUCKET_URL = URLS.bucket;
-const PACKAGER_URL= PROD_URLS.packager;
+const PACKAGER_URL = PROD_URLS.packager;
 // const PACKAGER_URL = 'http://localhost:4545/oort2/dependencies/packager';
 
 function callApi(url: string, method = 'GET') {
@@ -86,11 +87,10 @@ async function requestPackager(
   try {
     const manifest = await callApi(url, method);
     return manifest;
-  } catch (err:any) {
+  } catch (err: any) {
     console.error({ err });
 
     throw new Error(err.response.error);
-
 
     // // If it's a 403 or network error, we retry the fetch
     // if (err.response && err.statusCode !== 403) {
@@ -137,13 +137,13 @@ export async function getDependency(
   // return bucketManifest;
 
   try {
-    throw new Error('error')
+    throw new Error('error');
     // const bucketManifest = await callApi(fullUrl);
     // return bucketManifest;
   } catch (e) {
     // The dep has not been generated yet...
     const packagerRequestUrl = `${PACKAGER_URL}/${dependencyUrl}`;
 
-    return requestPackager(packagerRequestUrl,"GET");
+    return requestPackager(packagerRequestUrl, 'GET');
   }
 }
