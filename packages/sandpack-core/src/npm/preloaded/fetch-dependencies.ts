@@ -116,18 +116,18 @@ export async function getDependency(
   depName: string,
   depVersion: string
 ): Promise<ILambdaResponse> {
-  let version = depVersion;
-  try {
-    const { version: absoluteVersion } = await getAbsoluteDependency(
-      depName,
-      depVersion
-    );
-    version = absoluteVersion;
-  } catch (e) {
-    /* Ignore this, not critical */
-  }
+  const normalizedVersion = depVersion;
+  // try {
+  //   const { version: absoluteVersion } = await getAbsoluteDependency(
+  //     depName,
+  //     depVersion
+  //   );
+  //   version = absoluteVersion;
+  // } catch (e) {
+  //   /* Ignore this, not critical */
+  // }
 
-  const normalizedVersion = normalizeVersion(version);
+  // const normalizedVersion = normalizeVersion(version);
   const dependencyUrl = dependenciesToQuery({ [depName]: normalizedVersion });
   const fullUrl = `${BUCKET_URL}/v${VERSION}/packages/${depName}/${normalizedVersion}.json`;
 

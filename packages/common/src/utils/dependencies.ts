@@ -39,7 +39,7 @@ const resolveVersionFromUnpkg = (
   version: string
 ): Promise<string> => {
   return fetchWithRetries(
-    `https://unpkg.com/${dep}@${encodeURIComponent(version)}/package.json`
+    `https://assets.weimob.com/${dep}@${encodeURIComponent(version)}/package.json`
   ).then(x => x.version);
 };
 
@@ -49,19 +49,21 @@ async function getLatestVersion(dep: string, version: string): Promise<string> {
     return version;
   }
 
-  try {
-    // If it is not an absolute version (e.g. a tag like `next`), we don't want to fetch
-    // using JSDelivr, because JSDelivr caches the response for a long time. Because of this,
-    // when a tag updates to a new version, people won't see that update for a long time.
-    // Instead, we download all possible versions from JSDelivr, and we check those versions
-    // to see what's the maximum satisfying version. The API call is cached for only 10s.
-    const allVersions = await fetchAllVersions(dep);
-    return (
-      allVersions.tags[version] || maxSatisfying(allVersions.versions, version)
-    );
-  } catch (e) {
-    return resolveVersionFromUnpkg(dep, version);
-  }
+  return resolveVersionFromUnpkg(dep, version);
+
+  // try {
+  //   // If it is not an absolute version (e.g. a tag like `next`), we don't want to fetch
+  //   // using JSDelivr, because JSDelivr caches the response for a long time. Because of this,
+  //   // when a tag updates to a new version, people won't see that update for a long time.
+  //   // Instead, we download all possible versions from JSDelivr, and we check those versions
+  //   // to see what's the maximum satisfying version. The API call is cached for only 10s.
+  //   const allVersions = await fetchAllVersions(dep);
+  //   return (
+  //     allVersions.tags[version] || maxSatisfying(allVersions.versions, version)
+  //   );
+  // } catch (e) {
+  //   return resolveVersionFromUnpkg(dep, version);
+  // }
 }
 
 export function isAbsoluteVersion(version: string) {

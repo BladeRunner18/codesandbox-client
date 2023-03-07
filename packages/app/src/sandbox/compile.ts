@@ -883,16 +883,16 @@ async function compile(opts: CompileOptions) {
     }
 
     if (firstLoad) {
-      metrics
-        .persistMeasurements({
-          sandboxId,
-          cacheUsed: usedCache,
-          browser: navigator.userAgent,
-          version: VERSION,
-        })
-        .catch(() => {
-          /* Do nothing with the error */
-        });
+      // metrics
+      //   .persistMeasurements({
+      //     sandboxId,
+      //     cacheUsed: usedCache,
+      //     browser: navigator.userAgent,
+      //     version: VERSION,
+      //   })
+      //   .catch(() => {
+      //     /* Do nothing with the error */
+      //   });
     }
   }
 
