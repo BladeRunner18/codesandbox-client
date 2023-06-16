@@ -27,7 +27,7 @@ const PROD_URLS = {
 
   bucket: 'http://172.19.17.92:7080/oort2',
   packager:
-    'http://bos-fe-oort2-node-kn.app.internal.weimobqa.com/oort2/dependencies/packager',
+    'http://bos-fe-oort2-node-kn.app.internal.weimob.com/oort2/dependencies/packager',
 };
 
 const URLS = PROD_URLS;
